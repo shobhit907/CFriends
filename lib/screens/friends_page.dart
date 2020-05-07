@@ -17,7 +17,7 @@ class _FriendsPageState extends State<FriendsPage> {
           if(snapshot.hasData){
             return ListView.builder(itemCount: snapshot.data.length,itemBuilder: (_,index){
               return CfUserWidget(snapshot.data[index]);
-            });
+            },shrinkWrap: true,);
           }else{
             return Loading();
           }

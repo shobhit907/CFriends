@@ -11,17 +11,21 @@ class CfUserWidget extends StatefulWidget {
 class _CfUserWidgetState extends State<CfUserWidget> {
   @override
   Widget build(BuildContext context) {
-    print(widget.cfUser.cfRank);
+    // print(widget.cfUser.cfRank);
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: InkWell(
         onTap: () {},
         child: Card(
+          shape: RoundedRectangleBorder(
+            borderRadius:BorderRadius.circular(30.0)
+          ),
+          semanticContainer: true,
           elevation: 8.0,
           child: Padding(
             padding: const EdgeInsets.all(4.0),
             child: Container(
-              height: 150.0,
+              height:180.0,
               child: Row(
                 children: <Widget>[
                   Expanded(
@@ -69,22 +73,29 @@ class _CfUserWidgetState extends State<CfUserWidget> {
                                   child: Text(
                                     widget.cfUser.cfRank,
                                     style: TextStyle(
-                                      color:  NameColor.getNameColor(widget.cfUser.cfRank),
-                                      fontSize: 18.0,
-                                      fontWeight: FontWeight.bold,
+                                      color: NameColor.getNameColor(
+                                          widget.cfUser.cfRank),
+                                      fontSize: 20.0,
+                                      fontWeight: FontWeight.w900,
                                     ),
                                   ),
                                 ),
                               ),
                             ),
                             Padding(
-                              padding: const EdgeInsets.only(left:8.0),
+                              padding: const EdgeInsets.only(left: 8.0),
                               child: Align(
                                 alignment: Alignment.centerLeft,
                                 child: Container(
-                                  child: Text(widget.cfUser.cfHandle,style: TextStyle(
-                                    color: NameColor.getNameColor(widget.cfUser.cfRank),
-                                  ),),
+                                  child: Text(
+                                    widget.cfUser.cfHandle,
+                                    style: TextStyle(
+                                      fontSize: 20.0,
+                                      fontWeight: FontWeight.w900,
+                                      color: NameColor.getNameColor(
+                                          widget.cfUser.cfRank),
+                                    ),
+                                  ),
                                 ),
                               ),
                             ),
@@ -93,14 +104,16 @@ class _CfUserWidgetState extends State<CfUserWidget> {
                               child: Align(
                                 alignment: Alignment.centerLeft,
                                 child: Container(
-                                  child: Text(widget.cfUser.cfFirstName +
-                                      " " +
-                                      widget.cfUser.cfLastName,),
+                                  child: Text(
+                                    widget.cfUser.cfFirstName +
+                                        " " +
+                                        widget.cfUser.cfLastName,
+                                  ),
                                 ),
                               ),
                             ),
                             Padding(
-                              padding: const EdgeInsets.only(left:8.0),
+                              padding: const EdgeInsets.only(left: 8.0),
                               child: Align(
                                 alignment: Alignment.centerLeft,
                                 child: Container(
@@ -117,7 +130,43 @@ class _CfUserWidgetState extends State<CfUserWidget> {
                     flex: 5,
                   ),
                   Expanded(
-                    child: Container(color: Colors.blue),
+                    child: Padding(
+                      padding: const EdgeInsets.all(4.0),
+                      child: Container(
+                        // color: Colors.blue,
+                        child: Column(
+                          children: <Widget>[
+                            Expanded(
+                              child: Padding(
+                                padding: const EdgeInsets.only(bottom:5.0),
+                                child: IconButton(icon: Icon(Icons.remove_circle), onPressed: (){}),
+                              ),
+                              flex: 2,
+                            ),
+                            Expanded(
+                              child: Padding(
+                                padding: const EdgeInsets.only(top:8.0),
+                                child: CircleAvatar(
+                                  child: Text(widget.cfUser.cfRating.toString()),
+                                  radius: 25.0,
+                                ),
+                              ),
+                              flex: 4,
+                            ),
+                            Divider(
+                              height: 5.0,
+                            ),
+                            Expanded(
+                              child: CircleAvatar(
+                                child: Text(widget.cfUser.cfMaxRating.toString()),
+                                radius: 25.0,
+                              ),
+                              flex: 4,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
                     flex: 3,
                   ),
                 ],
