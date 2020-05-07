@@ -12,7 +12,7 @@ class _FriendsPageState extends State<FriendsPage> {
   Widget build(BuildContext context) {
     return Container(
       child: FutureBuilder<List<CFUser>>(
-        future: _cfService.fetchUsers(["shobhit907","roronoa_"]),
+        future: _cfService.fetchUsers(["shobhit907","tourist","akshaygahlot73","Ashishgup","BencilSharpeniro"]),
         builder: (context, AsyncSnapshot<List<CFUser>> snapshot) {
           if(snapshot.hasData){
             return ListView.builder(itemCount: snapshot.data.length,itemBuilder: (_,index){

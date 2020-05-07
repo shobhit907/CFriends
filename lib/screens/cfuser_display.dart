@@ -11,6 +11,7 @@ class CfUserWidget extends StatefulWidget {
 class _CfUserWidgetState extends State<CfUserWidget> {
   @override
   Widget build(BuildContext context) {
+    print(widget.cfUser.cfRank);
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: InkWell(
@@ -68,7 +69,7 @@ class _CfUserWidgetState extends State<CfUserWidget> {
                                   child: Text(
                                     widget.cfUser.cfRank,
                                     style: TextStyle(
-                                      color: HexColor("#2D67FC"),
+                                      color:  NameColor.getNameColor(widget.cfUser.cfRank),
                                       fontSize: 18.0,
                                       fontWeight: FontWeight.bold,
                                     ),
@@ -81,7 +82,9 @@ class _CfUserWidgetState extends State<CfUserWidget> {
                               child: Align(
                                 alignment: Alignment.centerLeft,
                                 child: Container(
-                                  child: Text(widget.cfUser.cfHandle),
+                                  child: Text(widget.cfUser.cfHandle,style: TextStyle(
+                                    color: NameColor.getNameColor(widget.cfUser.cfRank),
+                                  ),),
                                 ),
                               ),
                             ),
@@ -92,7 +95,7 @@ class _CfUserWidgetState extends State<CfUserWidget> {
                                 child: Container(
                                   child: Text(widget.cfUser.cfFirstName +
                                       " " +
-                                      widget.cfUser.cfLastName),
+                                      widget.cfUser.cfLastName,),
                                 ),
                               ),
                             ),

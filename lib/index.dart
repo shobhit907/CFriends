@@ -11,5 +11,5 @@ export 'screens/feed_page.dart';
 export 'screens/profile_page.dart';
 export 'services/codeforces_api.dart';
 export 'screens/loading.dart';
-export 'utilities/colors.dart';
 export 'package:rename/rename.dart';
+export 'package:CFriends/utilities/colors.dart';
