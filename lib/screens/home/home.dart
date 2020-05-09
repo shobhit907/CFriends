@@ -40,21 +40,30 @@ class _HomeState extends State<Home> {
     setState(() {
       friendsHandle.remove(_handle);
     });
-    print(friendsHandle);
   }
 
   List<Widget> _widgetOptions = [Loading(), Loading(), Loading()];
   // _widgetOptions[1]=FeedPage();
+  bool _feedInitialized = false, _profileInitialized = false;
 
   @override
   Widget build(BuildContext context) {
-    print("Building");
-    if (_pageIndex == 0)
+    if (_pageIndex == 0) {
+      print("Friends page building");
+      print(friendsHandle);
       _widgetOptions[0] =
           (FriendsPage(friendsHandle, addFriendHandle, removeFriendHandle));
-    else if (_pageIndex == 1)
+    }
+    if (_pageIndex == 1 && (!_feedInitialized)) {
+      print("Feed page building");
       _widgetOptions[1] = (FeedPage());
-    else if (_pageIndex == 2) _widgetOptions[2] = (ProfilePage());
+      _feedInitialized = true;
+    }
+    if (_pageIndex == 2 && (!_profileInitialized)) {
+      print("Profile page building");
+      _widgetOptions[2] = (ProfilePage());
+      _profileInitialized = true;
+    }
     return FutureBuilder<List<String>>(
         future: getFriendsHandle(),
         builder: (context, snapshot) {

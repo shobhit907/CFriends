@@ -1,6 +1,4 @@
 import 'package:CFriends/index.dart';
-import 'package:CFriends/screens/cfuser_display.dart';
-import 'package:provider/provider.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
 class FriendsPage extends StatefulWidget {
@@ -72,8 +70,11 @@ class _FriendsPageState extends State<FriendsPage> {
               return ListView.builder(
                 itemCount: snapshot.data.length,
                 itemBuilder: (_, index) {
-                  return CfUserWidget(
-                      snapshot.data[index], widget.removeFriendHandle);
+                  return InkWell(
+                    onTap: (){},
+                                      child: CfUserWidget(
+                        snapshot.data[index], widget.removeFriendHandle),
+                  );
                 },
               );
             } else {

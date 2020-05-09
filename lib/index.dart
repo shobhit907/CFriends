@@ -13,3 +13,6 @@ export 'services/codeforces_api.dart';
 export 'screens/loading.dart';
 export 'package:rename/rename.dart';
 export 'package:CFriends/utilities/colors.dart';
+export 'package:analyzer_plugin/utilities/pair.dart';
+export 'screens/cfuser_shortdisplay.dart';
+export 'screens/cfuser_fulldisplay.dart';

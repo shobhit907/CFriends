@@ -15,9 +15,12 @@ class DatabaseService{
         });
     }
     Future<bool> addFriend(User u,String handle)async{
-        bool _exist=await _cfService.userExists(handle);
+        Pair<bool,String> _ret=await _cfService.userExists(handle);
+        print(_ret);
+        bool _exist=_ret.first;
         if(_exist){
-              await users.document(u.uid).updateData({'cf_friends':FieldValue.arrayUnion([handle])});
+          print(_ret.last);
+              await users.document(u.uid).updateData({'cf_friends':FieldValue.arrayUnion([_ret.last])});
         }
         return _exist;
     }

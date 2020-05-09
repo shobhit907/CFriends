@@ -32,15 +32,15 @@ class CodeforcesService {
     }
   }
 
-  Future<bool> userExists(String handle) async {
+  Future<Pair<bool,String>> userExists(String handle) async {
     var _baseUrl = "https://codeforces.com/api/user.info?handles=";
     _baseUrl += handle;
     var _response = await http.get(_baseUrl);
     var _decode = json.decode(_response.body);
     if (_decode['status'] == "OK") {
-      return true;
+      return Pair<bool,String>(true,_decode['result'].cast<Map<String,dynamic>>()[0]['handle']);
     } else {
-      return false;
+      return Pair<bool,String>(false,"");
     }
   }
 }
