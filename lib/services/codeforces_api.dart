@@ -12,20 +12,35 @@ class CodeforcesService {
 
   Future<List<CFUser>> fetchUsers(List<String> handles) async {
     var _baseUrl = "https://codeforces.com/api/user.info?handles=";
+    // print("In fetch user");
+    // print(handles);
     handles.forEach((handle) {
       _baseUrl += handle + ";";
     });
     var _response = await http.get(_baseUrl);
     var _decode = json.decode(_response.body);
     if (_decode['status'] == "OK") {
-      List _result = _decode['result'].cast<Map<String,dynamic>>();
+      List _result = _decode['result'].cast<Map<String, dynamic>>();
       //Isolate
-      // print(_result);
-      List<CFUser> _ret=[];
-      _result.forEach((_res){_ret.add(CFUser.fromJson(_res));});
+      List<CFUser> _ret = [];
+      _result.forEach((_res) {
+        _ret.add(CFUser.fromJson(_res));
+      });
       return _ret;
     } else {
       return List();
+    }
+  }
+
+  Future<bool> userExists(String handle) async {
+    var _baseUrl = "https://codeforces.com/api/user.info?handles=";
+    _baseUrl += handle;
+    var _response = await http.get(_baseUrl);
+    var _decode = json.decode(_response.body);
+    if (_decode['status'] == "OK") {
+      return true;
+    } else {
+      return false;
     }
   }
 }

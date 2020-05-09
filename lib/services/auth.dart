@@ -16,19 +16,19 @@ class AuthService{
     final FirebaseUser currentUser = await _firebaseAuth.currentUser();
     assert(user.uid == currentUser.uid);
     // print(user);
-    User _temp=_userFromFirebaseUser(currentUser);
+    User _temp=userFromFirebaseUser(currentUser);
     if(_authResult.additionalUserInfo.isNewUser){
       await _database.addUser(_temp);
     }
     return _temp;
   }
 
-  User _userFromFirebaseUser(FirebaseUser _firebaseUser){
+  User userFromFirebaseUser(FirebaseUser _firebaseUser){
       return _firebaseUser==null?null:User(_firebaseUser.uid,_firebaseUser.displayName,_firebaseUser.email,_firebaseUser.photoUrl);
   }
 
   Stream<User> get user{
-    return _firebaseAuth.onAuthStateChanged.map(_userFromFirebaseUser);
+    return _firebaseAuth.onAuthStateChanged.map(userFromFirebaseUser);
   }
 
   Future signOutGoogle() async{

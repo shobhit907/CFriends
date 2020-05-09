@@ -32,6 +32,7 @@ dependencies:
   bottom_navy_bar: ^5.4.0
   http: ^0.12.1
   rename: ^1.1.9
+  rflutter_alert: ^1.0.3
 
 
 dev_dependencies:

@@ -3,7 +3,8 @@ import 'package:CFriends/index.dart';
 
 class CfUserWidget extends StatefulWidget {
   final CFUser cfUser;
-  CfUserWidget(this.cfUser);
+  Function removeFriendHandle;
+  CfUserWidget(this.cfUser, this.removeFriendHandle);
   @override
   _CfUserWidgetState createState() => _CfUserWidgetState();
 }
@@ -17,15 +18,14 @@ class _CfUserWidgetState extends State<CfUserWidget> {
       child: InkWell(
         onTap: () {},
         child: Card(
-          shape: RoundedRectangleBorder(
-            borderRadius:BorderRadius.circular(30.0)
-          ),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
           semanticContainer: true,
           elevation: 8.0,
           child: Padding(
             padding: const EdgeInsets.all(4.0),
             child: Container(
-              height:180.0,
+              height: 180.0,
               child: Row(
                 children: <Widget>[
                   Expanded(
@@ -138,16 +138,22 @@ class _CfUserWidgetState extends State<CfUserWidget> {
                           children: <Widget>[
                             Expanded(
                               child: Padding(
-                                padding: const EdgeInsets.only(bottom:5.0),
-                                child: IconButton(icon: Icon(Icons.remove_circle), onPressed: (){}),
+                                padding: const EdgeInsets.only(bottom: 5.0),
+                                child: IconButton(
+                                    icon: Icon(Icons.remove_circle),
+                                    onPressed: () {
+                                      widget.removeFriendHandle(
+                                          widget.cfUser.cfHandle);
+                                    }),
                               ),
                               flex: 2,
                             ),
                             Expanded(
                               child: Padding(
-                                padding: const EdgeInsets.only(top:8.0),
+                                padding: const EdgeInsets.only(top: 8.0),
                                 child: CircleAvatar(
-                                  child: Text(widget.cfUser.cfRating.toString()),
+                                  child:
+                                      Text(widget.cfUser.cfRating.toString()),
                                   radius: 25.0,
                                 ),
                               ),
@@ -158,7 +164,8 @@ class _CfUserWidgetState extends State<CfUserWidget> {
                             ),
                             Expanded(
                               child: CircleAvatar(
-                                child: Text(widget.cfUser.cfMaxRating.toString()),
+                                child:
+                                    Text(widget.cfUser.cfMaxRating.toString()),
                                 radius: 25.0,
                               ),
                               flex: 4,
