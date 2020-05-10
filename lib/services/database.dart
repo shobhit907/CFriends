@@ -14,7 +14,7 @@ class DatabaseService{
           'cf_friends':u.friendsHandle,
         });
     }
-    Future<bool> addFriend(User u,String handle)async{
+    Future<Pair<bool,String>> addFriend(User u,String handle)async{
         Pair<bool,String> _ret=await _cfService.userExists(handle);
         print(_ret);
         bool _exist=_ret.first;
@@ -22,7 +22,7 @@ class DatabaseService{
           print(_ret.last);
               await users.document(u.uid).updateData({'cf_friends':FieldValue.arrayUnion([_ret.last])});
         }
-        return _exist;
+        return _ret;
     }
 
     Future removeFriend(User u,String handle) async{

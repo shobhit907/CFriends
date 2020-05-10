@@ -2,21 +2,17 @@ import 'package:CFriends/index.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
 class FriendsPage extends StatefulWidget {
-  final List<String> friendsHandle;
-  Function addFriendHandle, removeFriendHandle;
-  FriendsPage(
-      this.friendsHandle, this.addFriendHandle, this.removeFriendHandle);
   @override
   _FriendsPageState createState() => _FriendsPageState();
 }
 
 class _FriendsPageState extends State<FriendsPage> {
   static final CodeforcesService _cfService = CodeforcesService();
-  static final DatabaseService _dbService = DatabaseService();
   TextEditingController _handleEntered = TextEditingController();
 
   Future<List<CFUser>> _giveFriends(BuildContext context) async {
-    Future<List<CFUser>> _ret = _cfService.fetchUsers(widget.friendsHandle);
+    Future<List<CFUser>> _ret = _cfService
+        .fetchUsers(Provider.of<CfFriendHandle>(context).friendsHandle);
     return _ret;
   }
 
@@ -39,11 +35,10 @@ class _FriendsPageState extends State<FriendsPage> {
       buttons: [
         DialogButton(
           onPressed: () async {
-            print(_handleEntered.value.text);
             if (_handleEntered.value.text != '') {
-              print("Not empty");
-
-              widget.addFriendHandle(_handleEntered.value.text);
+              Provider.of<CfFriendHandle>(context, listen: false).set(true);
+              Provider.of<CfFriendHandle>(context, listen: false)
+                  .addFriendHandle(_handleEntered.value.text);
             }
             return Navigator.pop(context);
           },
@@ -71,9 +66,10 @@ class _FriendsPageState extends State<FriendsPage> {
                 itemCount: snapshot.data.length,
                 itemBuilder: (_, index) {
                   return InkWell(
-                    onTap: (){},
-                                      child: CfUserWidget(
-                        snapshot.data[index], widget.removeFriendHandle),
+                    onTap: () {},
+                    child: CfUserWidget(
+                      snapshot.data[index],
+                    ),
                   );
                 },
               );

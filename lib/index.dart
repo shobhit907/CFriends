@@ -16,3 +16,6 @@ export 'package:CFriends/utilities/colors.dart';
 export 'package:analyzer_plugin/utilities/pair.dart';
 export 'screens/cfuser_shortdisplay.dart';
 export 'screens/cfuser_fulldisplay.dart';
+export 'models/cf_friend_handle.dart';
+export 'package:provider/provider.dart';
+export 'package:flutter/foundation.dart';

@@ -1,7 +1,5 @@
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:CFriends/index.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:provider/provider.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -9,114 +7,71 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  void initState() {
-    super.initState();
-    // getFriendsHandle();
-  }
-
-  AuthService _authService = AuthService();
-  CodeforcesService _cfService = CodeforcesService();
-  DatabaseService _dbService = DatabaseService();
   int _pageIndex = 0;
-  static List<String> friendsHandle = ["shobhit907", "bit_show"];
 
-  Future<List<String>> getFriendsHandle() async {
-    User u = Provider.of<User>(context, listen: false);
-    friendsHandle = await _dbService.getFriends(u);
-    return friendsHandle;
-  }
-
-  void addFriendHandle(String _handle) async {
-    User u = Provider.of<User>(context, listen: false);
-    await _dbService.addFriend(u, _handle);
-    setState(() {
-      friendsHandle.add(_handle);
-    });
-  }
-
-  void removeFriendHandle(String _handle) async {
-    User u = Provider.of<User>(context, listen: false);
-    await _dbService.removeFriend(u, _handle);
-    setState(() {
-      friendsHandle.remove(_handle);
-    });
-  }
-
-  List<Widget> _widgetOptions = [Loading(), Loading(), Loading()];
-  // _widgetOptions[1]=FeedPage();
-  bool _feedInitialized = false, _profileInitialized = false;
+  List<Widget> _widgetOptions = [FriendsPage(), FeedPage(), ProfilePage()];
 
   @override
   Widget build(BuildContext context) {
-    if (_pageIndex == 0) {
-      print("Friends page building");
-      print(friendsHandle);
-      _widgetOptions[0] =
-          (FriendsPage(friendsHandle, addFriendHandle, removeFriendHandle));
+    if (Provider.of<CfFriendHandle>(context, listen: false).get()) {
+      _widgetOptions[0] = FriendsPage();
+      Provider.of<CfFriendHandle>(context, listen: false).set(false);
     }
-    if (_pageIndex == 1 && (!_feedInitialized)) {
-      print("Feed page building");
-      _widgetOptions[1] = (FeedPage());
-      _feedInitialized = true;
-    }
-    if (_pageIndex == 2 && (!_profileInitialized)) {
-      print("Profile page building");
-      _widgetOptions[2] = (ProfilePage());
-      _profileInitialized = true;
-    }
-    return FutureBuilder<List<String>>(
-        future: getFriendsHandle(),
-        builder: (context, snapshot) {
-          if (!snapshot.hasData) {
-            return FriendsPage([], addFriendHandle, removeFriendHandle);
-          } else {
-            friendsHandle = snapshot.data;
-            _widgetOptions[0] =
-                FriendsPage(friendsHandle, addFriendHandle, removeFriendHandle);
-            return Scaffold(
-              appBar: AppBar(
-                title: Text("CFriends"),
-                actions: <Widget>[
-                  IconButton(
-                      icon: Icon(Icons.refresh),
-                      onPressed: () async {
-                        await getFriendsHandle();
-                        print("Rebuild");
-                        setState(() {});
-                      })
-                ],
+    return Consumer<CfFriendHandle>(
+      builder: (context, cfFriendHandle, child) {
+        return Scaffold(
+          appBar: AppBar(
+            title: Text("CFriends"),
+            actions: <Widget>[
+              IconButton(
+                  icon: Icon(Icons.refresh),
+                  onPressed: () async {
+                    if (_pageIndex == 0) {
+                      await cfFriendHandle.getFriendsHandle();
+                    }
+                    setState(() {
+                      if (_pageIndex == 0) {
+                        _widgetOptions[0] = FriendsPage();
+                      } else if (_pageIndex == 1) {
+                        _widgetOptions[1] = FeedPage();
+                      } else if (_pageIndex == 2) {
+                        _widgetOptions[2] = ProfilePage();
+                      }
+                    });
+                  })
+            ],
+          ),
+          bottomNavigationBar: BottomNavyBar(
+            items: [
+              BottomNavyBarItem(
+                icon: Icon(Icons.people),
+                title: Text('Friends'),
+                activeColor: Colors.red,
               ),
-              bottomNavigationBar: BottomNavyBar(
-                items: [
-                  BottomNavyBarItem(
-                    icon: Icon(Icons.people),
-                    title: Text('Friends'),
-                    activeColor: Colors.red,
-                  ),
-                  BottomNavyBarItem(
-                      icon: Icon(Icons.rss_feed),
-                      title: Text('Feed'),
-                      activeColor: Colors.pink),
-                  BottomNavyBarItem(
-                      icon: Icon(Icons.person),
-                      title: Text('Profile'),
-                      activeColor: Colors.blue),
-                ],
-                selectedIndex: _pageIndex,
-                showElevation: true,
-                curve: Curves.ease,
-                onItemSelected: (index) {
-                  setState(() {
-                    _pageIndex = index;
-                  });
-                },
-              ),
-              body: IndexedStack(
-                children: _widgetOptions,
-                index: _pageIndex,
-              ),
-            );
-          }
-        });
+              BottomNavyBarItem(
+                  icon: Icon(Icons.rss_feed),
+                  title: Text('Feed'),
+                  activeColor: Colors.pink),
+              BottomNavyBarItem(
+                  icon: Icon(Icons.person),
+                  title: Text('Profile'),
+                  activeColor: Colors.blue),
+            ],
+            selectedIndex: _pageIndex,
+            showElevation: true,
+            curve: Curves.ease,
+            onItemSelected: (index) {
+              setState(() {
+                _pageIndex = index;
+              });
+            },
+          ),
+          body: IndexedStack(
+            children: _widgetOptions,
+            index: _pageIndex,
+          ),
+        );
+      },
+    );
   }
 }

@@ -3,8 +3,7 @@ import 'package:CFriends/index.dart';
 
 class CfUserWidget extends StatefulWidget {
   final CFUser cfUser;
-  Function removeFriendHandle;
-  CfUserWidget(this.cfUser, this.removeFriendHandle);
+  CfUserWidget(this.cfUser,);
   @override
   _CfUserWidgetState createState() => _CfUserWidgetState();
 }
@@ -139,8 +138,7 @@ class _CfUserWidgetState extends State<CfUserWidget> {
                               child: IconButton(
                                   icon: Icon(Icons.remove_circle),
                                   onPressed: () async {
-                                    await widget.removeFriendHandle(
-                                        widget.cfUser.cfHandle);
+                                    Provider.of<CfFriendHandle>(context,listen: false).removeFriendHandle(widget.cfUser.cfHandle);
                                   }),
                             ),
                             flex: 2,
