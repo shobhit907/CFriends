@@ -14,8 +14,10 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     if (Provider.of<CfFriendHandle>(context, listen: false).get()) {
+      print("Build home under cffriendhandle provider");
+        Provider.of<CfFriendHandle>(context, listen: false).set(false);
+          Provider.of<CfFriendHandle>(context).getFriendsHandle();
       _widgetOptions[0] = FriendsPage();
-      Provider.of<CfFriendHandle>(context, listen: false).set(false);
     }
     return Consumer<CfFriendHandle>(
       builder: (context, cfFriendHandle, child) {

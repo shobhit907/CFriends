@@ -4,7 +4,6 @@ import 'package:CFriends/index.dart';
 class DatabaseService{
     static final CollectionReference users=Firestore.instance.collection('users');
     static final CodeforcesService _cfService=CodeforcesService();
-    static final AuthService _authService=AuthService();
     Future addUser (User u)async{
         return await users.document(u.uid).setData({
           'uid':u.uid,
@@ -19,7 +18,6 @@ class DatabaseService{
         print(_ret);
         bool _exist=_ret.first;
         if(_exist){
-          print(_ret.last);
               await users.document(u.uid).updateData({'cf_friends':FieldValue.arrayUnion([_ret.last])});
         }
         return _ret;

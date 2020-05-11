@@ -11,19 +11,23 @@ class _AuthenticateState extends State<Authenticate> {
   
   @override
   Widget build(BuildContext context) {
-      return Scaffold(
-          appBar: AppBar(
-            title: Text("CFriends"),
-          ),
-          body: Center(
-            child: GoogleSignInButton(
-              onPressed:()async{
-                await  _authService.signInGoogle();
-                },
-              darkMode:true,
-              borderRadius: 10.0,
+      return MaterialApp(
+        debugShowCheckedModeBanner:false,
+          theme:ThemeData.dark(),
+              home: Scaffold(
+            appBar: AppBar(
+              title: Text("CFriends"),
             ),
-          ),
+            body: Center(
+              child: GoogleSignInButton(
+                onPressed:()async{
+                  await  _authService.signInGoogle();
+                  },
+                darkMode:true,
+                borderRadius: 10.0,
+              ),
+            ),
+        ),
       );
   }
 }

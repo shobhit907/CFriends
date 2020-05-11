@@ -54,6 +54,7 @@ class _FriendsPageState extends State<FriendsPage> {
 
   @override
   Widget build(BuildContext context) {
+    print(Provider.of<CfFriendHandle>(context).friendsHandle);
     return Scaffold(
       body: Container(
         child: FutureBuilder<List<CFUser>>(
@@ -66,7 +67,12 @@ class _FriendsPageState extends State<FriendsPage> {
                 itemCount: snapshot.data.length,
                 itemBuilder: (_, index) {
                   return InkWell(
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.push(
+                          _,
+                          MaterialPageRoute(
+                              builder: (_) => CFUserSubmission(handle: snapshot.data[index].cfHandle,)));
+                    },
                     child: CfUserWidget(
                       snapshot.data[index],
                     ),
