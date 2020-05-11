@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:CFriends/index.dart';
+import 'package:CFriends/models/cf_submission.dart';
 import 'package:http/http.dart' as http;
 
 class CodeforcesService {
@@ -41,6 +42,24 @@ class CodeforcesService {
       return Pair<bool,String>(true,_decode['result'].cast<Map<String,dynamic>>()[0]['handle']);
     } else {
       return Pair<bool,String>(false,"");
+    }
+  }
+
+  Future<List<Submission>> fetchSubmissions(String handle,{int start=1,int count=10})async{
+    var _baseUrl="https://codeforces.com/api/user.status?handle=$handle&from=$start&count=$count";
+    var _response = await http.get(_baseUrl);
+    var _decode = json.decode(_response.body);
+    // print(_decode);
+    if(_decode['status']=="OK"){
+      List _result = _decode['result'].cast<Map<String, dynamic>>();
+      //Isolate
+      List<Submission> _ret = [];
+      _result.forEach((_res) {
+        _ret.add(Submission.fromJson(_res));
+      });
+      return _ret;
+    }else{
+      return List();
     }
   }
 }

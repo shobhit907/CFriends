@@ -3,7 +3,9 @@ import 'package:CFriends/index.dart';
 
 class CfUserWidget extends StatefulWidget {
   final CFUser cfUser;
-  CfUserWidget(this.cfUser,);
+  CfUserWidget(
+    this.cfUser,
+  );
   @override
   _CfUserWidgetState createState() => _CfUserWidgetState();
 }
@@ -83,13 +85,21 @@ class _CfUserWidgetState extends State<CfUserWidget> {
                             child: Align(
                               alignment: Alignment.centerLeft,
                               child: Container(
-                                child: Text(
-                                  widget.cfUser.cfHandle,
-                                  style: TextStyle(
-                                    fontSize: 20.0,
-                                    fontWeight: FontWeight.w900,
-                                    color: NameColor.getNameColor(
-                                        widget.cfUser.cfRank),
+                                child: InkWell(
+                                  onTap: () async {
+                                    await launch(
+                                        "https://codeforces.com/profile/" +
+                                            widget.cfUser.cfHandle);
+                                  },
+                                  child: Text(
+                                    widget.cfUser.cfHandle,
+                                    style: TextStyle(
+                                      decoration: TextDecoration.underline,
+                                      fontSize: 20.0,
+                                      fontWeight: FontWeight.w900,
+                                      color: NameColor.getNameColor(
+                                          widget.cfUser.cfRank),
+                                    ),
                                   ),
                                 ),
                               ),
@@ -138,7 +148,10 @@ class _CfUserWidgetState extends State<CfUserWidget> {
                               child: IconButton(
                                   icon: Icon(Icons.remove_circle),
                                   onPressed: () async {
-                                    Provider.of<CfFriendHandle>(context,listen: false).removeFriendHandle(widget.cfUser.cfHandle);
+                                    Provider.of<CfFriendHandle>(context,
+                                            listen: false)
+                                        .removeFriendHandle(
+                                            widget.cfUser.cfHandle);
                                   }),
                             ),
                             flex: 2,

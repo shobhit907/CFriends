@@ -1,7 +1,7 @@
 import 'package:CFriends/index.dart';
 
 class FeedPage extends StatefulWidget {
-  String data="";
+  var data="";
   @override
   _FeedPageState createState() => _FeedPageState();
 }
@@ -17,7 +17,7 @@ class _FeedPageState extends State<FeedPage> {
         children: [
           RaisedButton.icon(
               onPressed: () async {
-                widget.data = await cs.fetchData();
+                widget.data = (await cs.fetchSubmissions("shobhit907",start: 1,count: 5))[0].problemName;
                 setState(() {});
               },
               icon: Icon(Icons.data_usage),

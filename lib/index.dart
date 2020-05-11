@@ -19,3 +19,5 @@ export 'screens/cfuser_fulldisplay.dart';
 export 'models/cf_friend_handle.dart';
 export 'package:provider/provider.dart';
 export 'package:flutter/foundation.dart';
+export 'models/cf_submission.dart';
+export 'package:url_launcher/url_launcher.dart';
