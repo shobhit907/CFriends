@@ -8,7 +8,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   int _pageIndex = 0;
-
+  final AuthService _authService=AuthService();
   List<Widget> _widgetOptions = [FriendsPage(), FeedPage(), ProfilePage()];
 
   @override
@@ -26,47 +26,57 @@ class _HomeState extends State<Home> {
             title: Text("CFriends"),
             actions: <Widget>[
               IconButton(
-                  icon: Icon(Icons.refresh),
+                  icon:_pageIndex==2?Icon(Icons.exit_to_app): Icon(Icons.refresh),
+                  tooltip: _pageIndex==2?"Sign Out":"Refresh",
                   onPressed: () async {
                     if (_pageIndex == 0) {
                       await cfFriendHandle.getFriendsHandle();
+                    }
+                    if(_pageIndex==2){
+                      await _authService.signOutGoogle();
                     }
                     setState(() {
                       if (_pageIndex == 0) {
                         _widgetOptions[0] = FriendsPage();
                       } else if (_pageIndex == 1) {
                         _widgetOptions[1] = FeedPage();
-                      } else if (_pageIndex == 2) {
-                        _widgetOptions[2] = ProfilePage();
                       }
                     });
                   })
             ],
           ),
-          bottomNavigationBar: BottomNavyBar(
-            items: [
-              BottomNavyBarItem(
-                icon: Icon(Icons.people),
-                title: Text('Friends'),
-                activeColor: Colors.red,
-              ),
-              BottomNavyBarItem(
-                  icon: Icon(Icons.rss_feed),
-                  title: Text('Feed'),
-                  activeColor: Colors.pink),
-              BottomNavyBarItem(
-                  icon: Icon(Icons.person),
-                  title: Text('Profile'),
-                  activeColor: Colors.blue),
-            ],
-            selectedIndex: _pageIndex,
-            showElevation: true,
-            curve: Curves.ease,
-            onItemSelected: (index) {
-              setState(() {
-                _pageIndex = index;
-              });
-            },
+          bottomNavigationBar: Container(
+            decoration: BoxDecoration(
+              borderRadius:BorderRadius.circular(50.0),
+            ),
+            child: BottomNavyBar(
+              backgroundColor: HexColor("#1e1c21"),
+              items: [
+                BottomNavyBarItem(
+                  icon: Icon(Icons.people),
+                  title: Text('Friends'),
+                  activeColor: HexColor("#7EDC50"),
+                ),
+                BottomNavyBarItem(
+                    icon: Icon(Icons.rss_feed),
+                    title: Text('Feed'),
+                    activeColor: HexColor("#FDF04C"),
+                    ),
+                BottomNavyBarItem(
+                    icon: Icon(Icons.person),
+                    title: Text('Profile'),
+                    activeColor: HexColor("#2D66FC"),
+                    ),
+              ],
+              selectedIndex: _pageIndex,
+              showElevation: true,
+              curve: Curves.ease,
+              onItemSelected: (index) {
+                setState(() {
+                  _pageIndex = index;
+                });
+              },
+            ),
           ),
           body: IndexedStack(
             children: _widgetOptions,

@@ -13,8 +13,6 @@ class CodeforcesService {
 
   Future<List<CFUser>> fetchUsers(List<String> handles) async {
     var _baseUrl = "https://codeforces.com/api/user.info?handles=";
-    // print("In fetch user");
-    // print(handles);
     handles.forEach((handle) {
       _baseUrl += handle + ";";
     });
@@ -61,5 +59,27 @@ class CodeforcesService {
     }else{
       return List();
     }
+  }
+
+  Future<List<BlogEntry>> fetchBlogEntries() async{
+    String _baseUrl="https://codeforces.com/api/recentActions?maxCount=100";
+    var _response=await http.get(_baseUrl);
+    var _decode=json.decode(_response.body);
+    if(_decode['status']=="OK"){
+      List _result=_decode['result'].cast<Map<String,dynamic>>();
+      List<BlogEntry> _ret=[];
+      _result.forEach((_res){
+        BlogEntry _be=BlogEntry.fromJson(_res);
+        if(_ret.indexWhere((BlogEntry _blogEntry){
+          return _blogEntry.id==_be.id;
+        })==-1){
+          _ret.add(_be);
+        }
+      });
+      return _ret;
+    }else{
+      return List();
+    }
+
   }
 }

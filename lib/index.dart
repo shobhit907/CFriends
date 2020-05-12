@@ -21,3 +21,4 @@ export 'package:provider/provider.dart';
 export 'package:flutter/foundation.dart';
 export 'models/cf_submission.dart';
 export 'package:url_launcher/url_launcher.dart';
+export 'models/cf_blog.dart';
