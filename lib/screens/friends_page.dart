@@ -18,6 +18,7 @@ class _FriendsPageState extends State<FriendsPage> {
 
   Future _showDialog() async {
     Alert(
+      style: AlertStyle(),
       context: context,
       title: "Add Friend",
       content: Column(
@@ -25,7 +26,13 @@ class _FriendsPageState extends State<FriendsPage> {
           TextField(
             controller: _handleEntered,
             decoration: InputDecoration(
-              icon: Icon(Icons.account_circle),
+              labelStyle: TextStyle(
+                color: Colors.lightGreen,
+              ),
+              icon: Icon(
+                Icons.account_circle,
+                color: Colors.lightGreenAccent,
+              ),
               labelText: 'CF Handle',
               hintText: 'e.g. shobhit907',
             ),
@@ -34,6 +41,7 @@ class _FriendsPageState extends State<FriendsPage> {
       ),
       buttons: [
         DialogButton(
+          color: Colors.lightGreen,
           onPressed: () async {
             if (_handleEntered.value.text != '') {
               Provider.of<CfFriendHandle>(context, listen: false).set(true);
@@ -71,7 +79,9 @@ class _FriendsPageState extends State<FriendsPage> {
                       Navigator.push(
                           _,
                           MaterialPageRoute(
-                              builder: (_) => CFUserSubmission(handle: snapshot.data[index].cfHandle,)));
+                              builder: (_) => CFUserSubmission(
+                                    handle: snapshot.data[index].cfHandle,
+                                  )));
                     },
                     child: CfUserWidget(
                       snapshot.data[index],
@@ -86,7 +96,13 @@ class _FriendsPageState extends State<FriendsPage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-          child: Icon(Icons.add_circle),
+          backgroundColor: Colors.lightGreen,
+          child: Icon(
+            Icons.person_add,
+            color: Colors.white,
+          ),
+          tooltip: "Add friend",
+          elevation: 10.0,
           onPressed: () async {
             _handleEntered.clear();
             await _showDialog();
