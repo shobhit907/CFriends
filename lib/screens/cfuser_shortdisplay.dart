@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:CFriends/index.dart';
 
+import 'webview.dart';
+
 class CfUserWidget extends StatefulWidget {
   final CFUser cfUser;
   CfUserWidget(
@@ -87,9 +89,11 @@ class _CfUserWidgetState extends State<CfUserWidget> {
                               child: Container(
                                 child: InkWell(
                                   onTap: () async {
-                                    await launch(
-                                        "https://codeforces.com/profile/" +
-                                            widget.cfUser.cfHandle);
+                                    Navigator.push(context, MaterialPageRoute(builder: (context)=>WebViewWidget(url:"https://codeforces.com/profile/" +
+                                            widget.cfUser.cfHandle,title:widget.cfUser.cfHandle)));
+                                    // await launch(
+                                    //     "https://codeforces.com/profile/" +
+                                    //         widget.cfUser.cfHandle);
                                   },
                                   child: Text(
                                     widget.cfUser.cfHandle,

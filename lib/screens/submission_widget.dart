@@ -1,5 +1,6 @@
 import 'package:CFriends/index.dart';
 import 'package:CFriends/models/cf_submission.dart';
+import 'package:CFriends/screens/webview.dart';
 import 'package:intl/intl.dart';
 
 class SubmissionWidget extends StatelessWidget {
@@ -45,12 +46,16 @@ class SubmissionWidget extends StatelessWidget {
                                 decoration: TextDecoration.underline),
                           ),
                           onTap: () async {
-                            await launch(
-                              "https://codeforces.com/contest/" +
+                            Navigator.push(context, MaterialPageRoute(builder: (context)=>WebViewWidget(url: "https://codeforces.com/contest/" +
                                   sub.contestId.toString() +
                                   "/problem/" +
-                                  sub.problemIndex,
-                            );
+                                  sub.problemIndex, title: sub.problemName)));
+                            // await launch(
+                            //   "https://codeforces.com/contest/" +
+                            //       sub.contestId.toString() +
+                            //       "/problem/" +
+                            //       sub.problemIndex,
+                            // );
                           },
                         ),
                       ),
@@ -62,10 +67,14 @@ class SubmissionWidget extends StatelessWidget {
                         padding: const EdgeInsets.all(4.0),
                         child: InkWell(
                           onTap: () async {
-                            await launch("https://codeforces.com/contest/" +
+                            Navigator.push(context, MaterialPageRoute(builder: (context)=>WebViewWidget(url: "https://codeforces.com/contest/" +
                                 sub.contestId.toString() +
                                 "/submission/" +
-                                sub.id.toString());
+                                sub.id.toString(), title: "Submission")));
+                            // await launch("https://codeforces.com/contest/" +
+                            //     sub.contestId.toString() +
+                            //     "/submission/" +
+                            //     sub.id.toString());
                           },
                           child: Text(
                             sub.verdict == "OK" ? "ACCEPTED" : sub.verdict,
