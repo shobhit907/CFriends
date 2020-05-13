@@ -46,13 +46,19 @@ class _FeedbackWidgetState extends State<FeedbackWidget> {
                 onPressed: () async {
                   if (rating != 0) {
                     FocusScope.of(context).unfocus();
-                    await _dbService.saveFeedback(
+                    bool _submitted = await _dbService.saveFeedback(
                         Provider.of<User>(context, listen: false),
                         rating,
                         _controller.value.text);
-                    Scaffold.of(context).showSnackBar(SnackBar(
-                      content: Text("Submitted"),
-                    ));
+                    if (_submitted) {
+                      Scaffold.of(context).showSnackBar(SnackBar(
+                        content: Text("Submitted"),
+                      ));
+                    } else {
+                      Scaffold.of(context).showSnackBar(SnackBar(
+                          content: Text(
+                              "You have given enough feedback. Be chill dude 🤣")));
+                    }
                     Scaffold.of(context).setState(() {
                       print("Feedback widget rebuilt");
                       _controller.text = "";

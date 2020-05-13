@@ -37,9 +37,12 @@ class DatabaseService{
     }
 
     static final CollectionReference _feedback=Firestore.instance.collection('feedback');
-    Future saveFeedback(User u,double rating,String comment)async{
+    Future<bool> saveFeedback(User u,double rating,String comment)async{
       final CollectionReference _comments=_feedback.document(u.uid).collection('comments');
-      await _feedback.document(u.uid).setData({'name':u.displayName,'email':u.displayName});
+      var temp=await _comments.getDocuments();
+      if(temp.documents.length>=10)return false;
+      await _feedback.document(u.uid).setData({'name':u.displayName,'email':u.email});
       await _comments.add({'rating':rating,'feedback':comment});
+      return true;
     }
 }
