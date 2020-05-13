@@ -10,6 +10,7 @@ class _LoadingState extends State<Loading> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      color: ThemeData.dark().backgroundColor,
         child: SpinKitHourGlass(color: Colors.white,size: 200.0,),
     );
   }

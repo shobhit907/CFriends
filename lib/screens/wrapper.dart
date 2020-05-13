@@ -16,6 +16,7 @@ class Wrapper extends StatelessWidget {
           debugShowCheckedModeBanner:false,
           theme:ThemeData.dark(),
             home:WrapperNext(),
+            title: "CFriends",
         ),
       );
     }

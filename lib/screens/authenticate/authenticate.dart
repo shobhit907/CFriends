@@ -14,6 +14,7 @@ class _AuthenticateState extends State<Authenticate> {
       return MaterialApp(
         debugShowCheckedModeBanner:false,
           theme:ThemeData.dark(),
+          title: "CFriends",
               home: Scaffold(
             appBar: AppBar(
               title: Text("CFriends"),

@@ -23,6 +23,10 @@ class _HomeState extends State<Home> {
       builder: (context, cfFriendHandle, child) {
         return Scaffold(
           appBar: AppBar(
+            leading: Container(child: Padding(
+              padding: const EdgeInsets.all(3.0),
+              child: Image.asset("lib/images/logo.png"),
+            )),
             title: Text("CFriends"),
             actions: <Widget>[
               IconButton(
