@@ -35,4 +35,11 @@ class DatabaseService{
     Stream<DocumentSnapshot> changes(User u){
       return users.document(u.uid).snapshots();
     }
+
+    static final CollectionReference _feedback=Firestore.instance.collection('feedback');
+    Future saveFeedback(User u,double rating,String comment)async{
+      final CollectionReference _comments=_feedback.document(u.uid).collection('comments');
+      await _feedback.document(u.uid).setData({'name':u.displayName,'email':u.displayName});
+      await _comments.add({'rating':rating,'feedback':comment});
+    }
 }

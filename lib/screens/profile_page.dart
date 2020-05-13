@@ -1,4 +1,5 @@
 import 'package:CFriends/index.dart';
+import 'package:CFriends/screens/feedback_widget.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -12,13 +13,17 @@ class _ProfilePageState extends State<ProfilePage> {
     User _u = Provider.of<User>(context, listen: false);
     return Container(
       child: Center(
-        child: Column(
+        child: ListView(
           children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: CircleAvatar(
-                backgroundImage: NetworkImage(_u.photoUrl),
-                radius: 100.0,
+            Container(
+              child: Center(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: CircleAvatar(
+                    backgroundImage: NetworkImage(_u.photoUrl),
+                    radius: 50.0,
+                  ),
+                ),
               ),
             ),
             Divider(),
@@ -34,6 +39,12 @@ class _ProfilePageState extends State<ProfilePage> {
                   ),
                 ),
               ),
+            ),
+            Divider(),
+            Divider(),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: FeedbackWidget(),
             ),
           ],
         ),

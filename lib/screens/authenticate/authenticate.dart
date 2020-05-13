@@ -17,6 +17,7 @@ class _AuthenticateState extends State<Authenticate> {
           title: "CFriends",
               home: Scaffold(
             appBar: AppBar(
+              leading: Image.asset("lib/images/logo.png"),
               title: Text("CFriends"),
             ),
             body: Center(

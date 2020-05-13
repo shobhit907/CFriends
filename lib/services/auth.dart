@@ -36,4 +36,5 @@ class AuthService{
     return await _firebaseAuth.signOut();
     // print("Sign out");
   }
+
 }
