@@ -1,4 +1,5 @@
 import 'package:CFriends/index.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
 class FriendsPage extends StatefulWidget {
@@ -77,11 +78,20 @@ class _FriendsPageState extends State<FriendsPage> {
                   return InkWell(
                     onTap: () {
                       Navigator.push(
-                          _,
-                          MaterialPageRoute(
-                              builder: (_) => CFUserSubmission(
-                                    handle: snapshot.data[index].cfHandle,
-                                  )));
+                          context,
+                          PageTransition(
+                              child: CFUserSubmission(
+                                handle: snapshot.data[index].cfHandle,
+                              ),
+                              type: PageTransitionType.rotate,
+                              curve: Curves.easeInSine,
+                              alignment: Alignment.topRight));
+                      // Navigator.push(
+                      //     _,
+                      //     MaterialPageRoute(
+                      //         builder: (_) => CFUserSubmission(
+                      //               handle: snapshot.data[index].cfHandle,
+                      //             )));
                     },
                     child: CfUserWidget(
                       snapshot.data[index],
