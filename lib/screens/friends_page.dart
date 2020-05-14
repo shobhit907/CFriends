@@ -112,7 +112,7 @@ class _FriendsPageState extends State<FriendsPage> {
             color: Colors.white,
           ),
           tooltip: "Add friend",
-          elevation: 10.0,
+          elevation: 20.0,
           
           onPressed: () async {
             _handleEntered.clear();
