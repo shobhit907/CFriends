@@ -5,7 +5,7 @@ class User{
     User(this.uid,this.displayName,this.email,this.photoUrl){
         // print(this.displayName);
     }
-    List<String> friendsHandle=["shobhit907","bit_show"];
+    List<String> friendsHandle=["shobhit907"];
     
 }
 
