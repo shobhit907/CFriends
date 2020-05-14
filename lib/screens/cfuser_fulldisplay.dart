@@ -20,7 +20,7 @@ class _CFUserSubmissionState extends State<CFUserSubmission> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Submission History")),
+      appBar: AppBar(title: Text(widget.handle+" submissions")),
       body: FutureBuilder(
           future: _cfService.fetchSubmissions(widget.handle,
               start: start, count: widget.count),
