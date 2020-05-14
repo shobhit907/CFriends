@@ -1,16 +1,15 @@
 # CFriends
 
-A new Flutter project.
+CFriends. It is a competitive programming companion app. It fetches data from the Codeforces API. It has the following features :
 
-## Getting Started
+1) Add handle of any Codeforces user. That user will become your friend in this app.
+2) For any friend you will see his/her current rating, maximum rating, current rank, current organization, etc.
+   A direct link to Codeforces profile is also given.
+3) You can view the latest submissions of any friend.
+   In each submission a direct link to the problem and the corresponding solution is given.
+4) All the links will open within the app itself.
+5) You can also remove any of your friend.
+6) Another feature is feed in which you can view the blog entries of Codeforces which has recent actions. A direct link to cf    is also provided.
+7) Finally you can also submit your feedback about the app from within the app itself.
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Pull requests are welcome.
