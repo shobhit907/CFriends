@@ -1,48 +1,82 @@
 {
   "project_info": {
-    "project_number": "",
-    "project_id": ""
+    "project_number": "925703449884",
+    "firebase_url": "https://codeforces-app.firebaseio.com",
+    "project_id": "codeforces-app",
+    "storage_bucket": "codeforces-app.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:123456789012:android:1234567890123456",
+        "mobilesdk_app_id": "1:925703449884:android:aefe397b5c008e9ab5ded9",
         "android_client_info": {
-          "package_name": "com.your.package"
+          "package_name": "com.shobhit.CFriends"
         }
       },
       "oauth_client": [
         {
-          "client_id": "",
-          "client_type": 3
-        },
-        {
-          "client_id": "",
+          "client_id": "925703449884-086jdhe7jukrid4u0697f20em7i30v9i.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.your.package",
-            "certificate_hash": ""
+            "package_name": "com.shobhit.CFriends",
+            "certificate_hash": "a63c98aa3adfe10da7df687f7e72ba031772f7ce"
           }
+        },
+        {
+          "client_id": "925703449884-6gdnld7dgapojdh1uoktqmvgajg9cnrq.apps.googleusercontent.com",
+          "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": ""
+          "current_key": "AIzaSyBA1i2l0uSn5NfIugK8o-9mjqciPQ5wvKM"
         }
       ],
       "services": {
-        "analytics_service": {
-          "status": 2,
-          "analytics_property": {
-            "tracking_id": ""
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "925703449884-6gdnld7dgapojdh1uoktqmvgajg9cnrq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:925703449884:android:eb043fbe066e3e76b5ded9",
+        "android_client_info": {
+          "package_name": "com.shobhit.CFriends"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "925703449884-uqmte4nn3c0mchj2bstnje0nimenibju.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.shobhit.CFriends",
+            "certificate_hash": "a63c98aa3adfe10da7df687f7e72ba031772f7ce"
           }
         },
+        {
+          "client_id": "925703449884-6gdnld7dgapojdh1uoktqmvgajg9cnrq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBA1i2l0uSn5NfIugK8o-9mjqciPQ5wvKM"
+        }
+      ],
+      "services": {
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
-        },
-        "ads_service": {
-          "status": 1
+          "other_platform_oauth_client": [
+            {
+              "client_id": "925703449884-6gdnld7dgapojdh1uoktqmvgajg9cnrq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }
